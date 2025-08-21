@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
-      - name: "Print env"
+      - name: "Print env vars and secrets"
         run: |
               printenv
               echo "${{env.client_secret}}"
@@ -31,3 +31,4 @@ jobs:
           region: ${{env.region}}
           repo: ${{env.repo}}
           tags: "latest"
+
