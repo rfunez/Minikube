@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+      - name: "Print env"
+        run: |
+              printenv
+              echo "${{env.client_secret}}"
       - name: "Build and push image to ECR"
         uses: kciter/aws-ecr-action@v5
         with:
