@@ -25,6 +25,8 @@ jobs:
           username: ${{env.access_key}}
           password: ${{env.client_secret}}
           registry: "${{env.account_id}}.dkr.ecr.eu-south-2.amazonaws.com"
+      - name: "Print steps registry"
+        run: echo ${{steps.docker-login.outputs.registry}}
       - name: "Build and push to ECR"
         uses: docker/build-push-action@v6
         with:
