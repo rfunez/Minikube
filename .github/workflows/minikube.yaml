@@ -1,0 +1,29 @@
+name: "Minikube wf"
+on:
+    push: 
+      branches: 
+        - develop
+    pull_request:
+      branches:
+        - main
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    env:
+        access_key: ${{vars.AWS_CLIENT_ID}}
+        region: ${{vars.REGION}}
+        repo: ${{vars.ECR_REPO}}
+        client_secret: ${{secrets.AWS_SECRET}}
+        account_id: ${{secrets.AWS_ID}}
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Build and push image to ECR"
+        uses: docker://ghcr.io/kciter/aws-ecr-action@v5
+        with:
+          access_key_id: ${{env.access_key}}
+          secret_access_key: ${{env.client_secret}}
+          account_id: ${{env.account_id}}
+          region: ${{env.region}}
+          repo: ${{env.repo}}
+          tags: "latest"
