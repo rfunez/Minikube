@@ -14,7 +14,7 @@ env:
     ecr_reg: "${{secrets.AWS_ID}}.dkr.ecr.eu-south-2.amazonaws.com"
 
 jobs:
-  image:
+  upload_image:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
@@ -30,5 +30,15 @@ jobs:
         with:
           push: true
           tags: "${{env.ecr_reg}}/actions/backend"
+  deploy:
+    needs: upload_image
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Configure kubectl"
+        uses: steebchen/kubectl@v2.0.0
+        with:
+            config: ${{ secrets.KUBE_CONFIG_DATA }}
+            command: "get pods -o wide"  
+        
 
 
