@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+      - name: "Check vars"
+        run: echo ${{secrets.AWS_SECRET}}
       - name: "Build and push image to ECR"
         uses: kciter/aws-ecr-action@v5
         with:
@@ -27,5 +29,6 @@ jobs:
           region: ${{env.region}}
           repo: ${{env.repo}}
           tags: "latest"
+
 
 
