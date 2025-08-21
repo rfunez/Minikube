@@ -6,31 +6,31 @@ on:
     pull_request:
       branches:
         - main
+env:
+    access_key: ${{vars.AWS_CLIENT_ID}}
+    region: ${{vars.REGION}}
+    repo: ${{vars.ECR_REPO}}
+    client_secret: ${{secrets.AWS_SECRET}}
+    registry: "${{secrets.AWS_ID}}.dkr.ecr.eu-south-2.amazonaws.com"
+
 jobs:
   image:
     runs-on: ubuntu-latest
-    env:
-        access_key: ${{vars.AWS_CLIENT_ID}}
-        region: ${{vars.REGION}}
-        repo: ${{vars.ECR_REPO}}
-        client_secret: ${{secrets.AWS_SECRET}}
-        account_id: ${{secrets.AWS_ID}}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
       - name: "Docker login"
-        id: "docker-login"
         uses: docker/login-action@v3
         with:
           username: ${{env.access_key}}
           password: ${{env.client_secret}}
-          registry: "${{env.account_id}}.dkr.ecr.eu-south-2.amazonaws.com"
+          registry: ${{env.registry}}
       - name: "Print steps registry"
         run: echo ${{steps.docker-login.outputs.registry}}
       - name: "Build and push to ECR"
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: "${{env.account_id}}.dkr.ecr.eu-south-2.amazonaws.com/actions/backend:latest"
+          tags: "${{env.registry}}"
 
 
