@@ -24,11 +24,11 @@ jobs:
         with:
           username: ${{env.access_key}}
           password: ${{env.client_secret}}
-          registry: ${{env.registry}}
+          registry: ${{env.ecr_reg}}
       - name: "Build and push to ECR"
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: "${{env.registry}}/actions/backend"
+          tags: "${{env.ecr_reg}}/actions/backend"
 
 
