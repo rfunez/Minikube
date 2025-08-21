@@ -18,17 +18,16 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
-      - name: "Check vars"
-        run: echo ${{secrets.AWS_SECRET}}
-      - name: "Build and push image to ECR"
-        uses: kciter/aws-ecr-action@v5
+      - name: "Docker login"
+        uses: docker/login-action@v3
         with:
-          access_key_id: ${{env.access_key}}
-          secret_access_key: ${{env.client_secret}}
-          account_id: ${{env.account_id}}
-          region: ${{env.region}}
-          repo: ${{env.repo}}
-          tags: "latest"
-
+          username: ${{env.access_key}}
+          password: ${{env.client_secret}}
+          registry: "${{env.account_id}}.dkr.ecr.eu-south-2.amazonaws.com"
+      - name: "Build and push to ECR"
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: "actions/backend:latest"
 
 
