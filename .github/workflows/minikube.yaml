@@ -11,7 +11,7 @@ env:
     region: ${{vars.REGION}}
     repo: ${{vars.ECR_REPO}}
     client_secret: ${{secrets.AWS_SECRET}}
-    registry: "${{secrets.AWS_ID}}.dkr.ecr.eu-south-2.amazonaws.com"
+    ecr_reg: "${{secrets.AWS_ID}}.dkr.ecr.eu-south-2.amazonaws.com"
 
 jobs:
   image:
@@ -29,6 +29,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: "${{env.registry}}"
+          tags: "${{env.registry}}/actions/backend"
 
 
