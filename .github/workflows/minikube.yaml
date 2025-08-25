@@ -48,7 +48,11 @@ jobs:
       - name: "Set credentials"
         uses: azure/setup-kubectl@v4
       - name: "Check kubectl"
-        run: kubectl version
+        run: |
+              kubectl config set-credentials --client-certificate ${{env.client_crt}} --client-key ${{env.client_key}} --kubeconfig ./kubeconfig/config
+              kubectl config set master --kubeconfig ./kubeconfig/config clusters.master.certificate-authority ${{env.ca_crt}}
+      - name: "Run kubectl"
+        run: kubectl get nodes
 
       
         
