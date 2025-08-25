@@ -33,11 +33,21 @@ jobs:
   deploy:
     needs: upload_image
     runs-on: ubuntu-latest
+    env:
+      ca_crt: 'ca.crt'
+      client_key: 'client.key'
+      client_crt: 'client.crt'
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
-      - name: "Update kubeconfig"
+      - name: "Create credentials"
+        run: |
+             echo "${{secrets.CLIENT_CRT}}" > ${{env.client_crt}}
+             echo "${{secrets.CLIENT_KEY}}" > ${{env.client_key}}
+             echo "${{secrets.CA_CRT}}" >${{env.ca_crt}}
+      - name: "Check credentials"
         run: ls -latr
+
       
         
 
