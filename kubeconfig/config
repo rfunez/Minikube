@@ -1,14 +1,14 @@
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: /home/rfunez/.minikube/ca.crt
+    certificate-authority: 
     extensions:
     - extension:
         last-update: Thu, 21 Aug 2025 13:49:07 CEST
         provider: minikube.sigs.k8s.io
         version: v1.36.0
       name: cluster_info
-    server: https://fabrics-delete-colombia-ethernet.trycloudflare.com
+    server: https://millennium-administrators-zu-loans.trycloudflare.com
   name: master
 contexts:
 - context:
@@ -28,5 +28,5 @@ preferences: {}
 users:
 - name: master
   user:
-    client-certificate: /home/rfunez/.minikube/profiles/master/client.crt
-    client-key: /home/rfunez/.minikube/profiles/master/client.key
+    client-certificate: 
+    client-key: 
