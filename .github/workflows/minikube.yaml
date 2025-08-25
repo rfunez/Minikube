@@ -34,7 +34,7 @@ jobs:
     needs: upload_image
     runs-on: ubuntu-latest
     env:
-      ca_crt: './kubeconfig/ca.crt'
+      ca_crt: './ca.crt'
       client_key: 'client.key'
       client_crt: 'client.crt'
       username: 'master'
