@@ -37,6 +37,7 @@ jobs:
       client_key: 'client.key'
       client_crt: 'client.crt'
       username: 'master'
+      ca_crt: ${{secrets.CA_CRT}}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -54,7 +55,7 @@ jobs:
                       --client-key ${{env.client_key}} \
                       --kubeconfig ./kubeconfig/config
               kubectl config set --kubeconfig ./kubeconfig/config \
-                      clusters.master.certificate-authority-data ${{secrets.CA_CRT}}
+                      clusters.master.certificate-authority-data ${{env.ca_crt}}
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
