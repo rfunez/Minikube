@@ -53,7 +53,9 @@ jobs:
               kubectl config set-credentials ${{env.username}} --client-certificate ${{env.client_crt}} --client-key ${{env.client_key}} --kubeconfig ./kubeconfig/config
               kubectl config set --kubeconfig ./kubeconfig/config clusters.master.certificate-authority ${{env.ca_crt}}
       - name: "Run kubectl"
-        run: kubectl get nodes
+        run: | 
+               kubectl config view --kubeconfig ./kubeconfig/config
+               kubectl get nodes
 
       
         
