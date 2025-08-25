@@ -34,7 +34,6 @@ jobs:
     needs: upload_image
     runs-on: ubuntu-latest
     env:
-      ca_crt: './ca.crt'
       client_key: 'client.key'
       client_crt: 'client.crt'
       username: 'master'
@@ -45,7 +44,6 @@ jobs:
         run: |
              echo "${{secrets.CLIENT_CRT}}" > ${{env.client_crt}}
              echo "${{secrets.CLIENT_KEY}}" > ${{env.client_key}}
-             echo "${{secrets.CA_CRT}}" >${{env.ca_crt}}
       - name: "Set credentials"
         uses: azure/setup-kubectl@v4
       - name: "Check kubectl"
@@ -56,7 +54,7 @@ jobs:
                       --client-key ${{env.client_key}} \
                       --kubeconfig ./kubeconfig/config
               kubectl config set --kubeconfig ./kubeconfig/config \
-                      clusters.master.certificate-authority $ca_crt
+                      clusters.master.certificate-authority-data ${{secrets.CA_CRT}}
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
