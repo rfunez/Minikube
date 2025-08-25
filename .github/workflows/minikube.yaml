@@ -34,13 +34,11 @@ jobs:
     needs: upload_image
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
       - name: "Update kubeconfig"
         run: ls -latr
-      - name: "Configure kubectl"
-        uses: steebchen/kubectl@v2.0.0
-        with:
-            config: ${{ secrets.KUBE_CONFIG_DATA }}
-            command: "get pods -o wide"  
+      
         
 
 
