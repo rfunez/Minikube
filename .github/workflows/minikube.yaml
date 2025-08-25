@@ -55,7 +55,7 @@ jobs:
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
-               curl -k -v https://millennium-administrators-zu-loans.trycloudflare.com/version
+               kubectl get nodes --kubeconfig ./kubeconfig/config
 
       
         
