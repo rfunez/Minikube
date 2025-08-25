@@ -49,7 +49,6 @@ jobs:
         uses: azure/setup-kubectl@v4
       - name: "Check kubectl"
         run: |
-              ca_crt=$(echo ${{secrets.ca_crt}} | base64)
               kubectl config set-credentials ${{env.username}} \
                       --client-certificate ${{env.client_crt}} \
                       --client-key ${{env.client_key}} \
@@ -63,5 +62,6 @@ jobs:
 
       
         
+
 
 
