@@ -50,8 +50,13 @@ jobs:
         uses: azure/setup-kubectl@v4
       - name: "Check kubectl"
         run: |
-              kubectl config set-credentials ${{env.username}} --client-certificate ${{env.client_crt}} --client-key ${{env.client_key}} --kubeconfig ./kubeconfig/config
-              kubectl config set --kubeconfig ./kubeconfig/config clusters.master.certificate-authority ${{env.ca_crt}}
+              ca_crt=$(echo ${{secrets.ca_crt}} | base64)
+              kubectl config set-credentials ${{env.username}} \
+                      --client-certificate ${{env.client_crt}} \
+                      --client-key ${{env.client_key}} \
+                      --kubeconfig ./kubeconfig/config
+              kubectl config set --kubeconfig ./kubeconfig/config \
+                      clusters.master.certificate-authority $ca_crt
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
