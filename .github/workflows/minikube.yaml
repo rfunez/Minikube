@@ -37,6 +37,7 @@ jobs:
       ca_crt: 'ca.crt'
       client_key: 'client.key'
       client_crt: 'client.crt'
+      username: 'master'
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -49,8 +50,8 @@ jobs:
         uses: azure/setup-kubectl@v4
       - name: "Check kubectl"
         run: |
-              kubectl config set-credentials --client-certificate ${{env.client_crt}} --client-key ${{env.client_key}} --kubeconfig ./kubeconfig/config
-              kubectl config set master --kubeconfig ./kubeconfig/config clusters.master.certificate-authority ${{env.ca_crt}}
+              kubectl config set-credentials ${{env.username}} --client-certificate ${{env.client_crt}} --client-key ${{env.client_key}} --kubeconfig ./kubeconfig/config
+              kubectl config set --kubeconfig ./kubeconfig/config clusters.master.certificate-authority ${{env.ca_crt}}
       - name: "Run kubectl"
         run: kubectl get nodes
 
