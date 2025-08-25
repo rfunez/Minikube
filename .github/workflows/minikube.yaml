@@ -54,7 +54,7 @@ jobs:
                       --client-key ${{env.client_key}} \
                       --kubeconfig ./kubeconfig/config
               kubectl config set --kubeconfig ./kubeconfig/config \
-                      clusters.master.certificate-authority-data ${{env.ca_crt}}
+                      clusters.master.certificate-authority=<(echo "$ca_crt")
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
