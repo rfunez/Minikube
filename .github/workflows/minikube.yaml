@@ -45,8 +45,10 @@ jobs:
              echo "${{secrets.CLIENT_CRT}}" > ${{env.client_crt}}
              echo "${{secrets.CLIENT_KEY}}" > ${{env.client_key}}
              echo "${{secrets.CA_CRT}}" >${{env.ca_crt}}
-      - name: "Check credentials"
-        run: ls -latr
+      - name: "Set credentials"
+        uses: azure/setup-kubectl@v4
+      - name: "Check kubectl"
+        run: kubectl version
 
       
         
