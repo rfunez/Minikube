@@ -55,6 +55,12 @@ jobs:
                       --kubeconfig ./kubeconfig/config
       - name: "Setup certificate authority"
         run: echo "${{secrets.CA_CRT}}" > ./kubeconfig/ca.crt
+      - name: "ECR login"
+        uses: docker/login-action@v3
+        with:
+          username: ${{env.access_key}}
+          password: ${{env.client_secret}}
+          registry: ${{env.ecr_reg}}
       - name: "Deploy app"
         run: | 
              kubectl apply -f deploy.yaml --kubeconfig ./kubeconfig/config
