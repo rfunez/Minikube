@@ -19,7 +19,7 @@ spec:
       containers:
       - name:  backend
         imagePullPolicy: IfNotPresent
-        image:  actions/backend:latest
+        image:  390403867561.dkr.ecr.eu-south-2.amazonaws.com/actions/backend:latest
         resources:
           requests:
             cpu: 100m
