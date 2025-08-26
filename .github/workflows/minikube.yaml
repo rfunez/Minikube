@@ -25,14 +25,14 @@ jobs:
           username: ${{env.access_key}}
           password: ${{env.client_secret}}
           registry: ${{env.ecr_reg}}
-      - name: "Cache ecr"
+      - name: "Cache ecr layer"
         id: cache
         uses: actions/cache@v4
         with:
           key: ecr-${{hashFiles('./backend/package.json')}}
           path: './backend'
       - name: "Build and push to ECR"
-        if: ${{steps.cache.outputs.cache-hit != true}}
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: docker/build-push-action@v6
         with:
           push: true
