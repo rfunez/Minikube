@@ -16,6 +16,8 @@ spec:
       labels:
         app:  app-backend
     spec:
+      imagePullSecrets:
+        - secret-ecr
       containers:
       - name:  backend
         imagePullPolicy: IfNotPresent
@@ -26,6 +28,9 @@ spec:
             memory: 200Mi
           limits:
             memory: 200Mi
+        envFrom:
+          - secretRef:
+              name: secrets_ecr
         ports:
         - containerPort:  80
           name: backend-port
