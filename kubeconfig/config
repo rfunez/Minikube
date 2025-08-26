@@ -1,14 +1,13 @@
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: 
     extensions:
     - extension:
         last-update: Thu, 21 Aug 2025 13:49:07 CEST
         provider: minikube.sigs.k8s.io
         version: v1.36.0
       name: cluster_info
-    server: https://millennium-administrators-zu-loans.trycloudflare.com
+    server: https://ryan-hood-az-vacancies.trycloudflare.com
   name: master
 contexts:
 - context:
@@ -27,6 +26,4 @@ kind: Config
 preferences: {}
 users:
 - name: master
-  user:
-    client-certificate: 
-    client-key: 
+  user: {}

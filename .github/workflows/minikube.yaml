@@ -45,9 +45,9 @@ jobs:
         run: |
              echo "${{secrets.CLIENT_CRT}}" > ${{env.client_crt}}
              echo "${{secrets.CLIENT_KEY}}" > ${{env.client_key}}
-      - name: "Set credentials"
+      - name: "Setup kubectl"
         uses: azure/setup-kubectl@v4
-      - name: "Check kubectl"
+      - name: "Setup client credentials"
         run: |
               kubectl config set-credentials ${{env.username}} \
                       --client-certificate ${{env.client_crt}} \
@@ -55,6 +55,8 @@ jobs:
                       --kubeconfig ./kubeconfig/config
               kubectl config set --kubeconfig ./kubeconfig/config \
                       clusters.master.certificate-authority=<(echo "$ca_crt")
+      - name: "Setup certificate authority"
+        run: echo ${{secrets.CA_CRT}} > ./kubeconfig/ca.crt
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
