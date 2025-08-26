@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  desafio-dep
+  namespace: practicas
+  labels:
+    app:  desafio-app
+spec:
+  selector:
+    matchLabels:
+      app: app-backend
+  replicas: 2
+  
+  template:
+    metadata:
+      labels:
+        app:  app-backend
+    spec:
+      containers:
+      - name:  backend
+        imagePullPolicy: IfNotPresent
+        image:  actions/backend:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            memory: 200Mi
+        ports:
+        - containerPort:  80
+          name: backend-port
+      restartPolicy: OnFailure

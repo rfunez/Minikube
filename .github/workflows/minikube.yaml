@@ -55,10 +55,9 @@ jobs:
                       --kubeconfig ./kubeconfig/config
       - name: "Setup certificate authority"
         run: echo "${{secrets.CA_CRT}}" > ./kubeconfig/ca.crt
-      - name: "Run kubectl"
+      - name: "Deploy app"
         run: | 
-               kubectl config view --kubeconfig ./kubeconfig/config
-               kubectl get nodes --kubeconfig ./kubeconfig/config
+             kubectl apply -f deploy.yaml --kubeconfig ./kubeconfig/config
 
       
         
