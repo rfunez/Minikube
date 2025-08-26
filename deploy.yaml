@@ -17,7 +17,7 @@ spec:
         app:  app-backend
     spec:
       imagePullSecrets:
-        - secret-ecr
+        - name: secret-ecr
       containers:
       - name:  backend
         imagePullPolicy: IfNotPresent
