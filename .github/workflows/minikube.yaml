@@ -54,7 +54,7 @@ jobs:
                       --client-key ${{env.client_key}} \
                       --kubeconfig ./kubeconfig/config
       - name: "Setup certificate authority"
-        run: echo ${{secrets.CA_CRT}} > ./kubeconfig/ca.crt
+        run: echo "${{secrets.CA_CRT}}" > ./kubeconfig/ca.crt
       - name: "Run kubectl"
         run: | 
                kubectl config view --kubeconfig ./kubeconfig/config
