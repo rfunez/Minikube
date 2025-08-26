@@ -63,6 +63,7 @@ jobs:
           registry: ${{env.ecr_reg}}
       - name: "Deploy app"
         run: | 
+             kubectl config view --kubeconfig ./kubeconfig/config
              kubectl apply -f deploy.yaml --kubeconfig ./kubeconfig/config
 
       
