@@ -28,9 +28,6 @@ spec:
             memory: 200Mi
           limits:
             memory: 200Mi
-        envFrom:
-          - secretRef:
-              name: secrets_ecr
         ports:
         - containerPort:  80
           name: backend-port
