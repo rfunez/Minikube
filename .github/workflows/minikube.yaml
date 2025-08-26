@@ -25,7 +25,7 @@ jobs:
           username: ${{env.access_key}}
           password: ${{env.client_secret}}
           registry: ${{env.ecr_reg}}
-      - name: "Cache"
+      - name: "Cache ecr"
         id: cache
         uses: actions/cache@v4
         with:
